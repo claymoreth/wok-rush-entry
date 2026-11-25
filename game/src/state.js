@@ -92,13 +92,19 @@ export function servePlate(game) {
   return { ok: true, name: recipe.name, points, perfect };
 }
 
+  // spawnOrder never duplicates a recipe already on the board: with at most
+// 3 tickets and 7 recipes there is always another recipe to pick.
 function spawnOrder(game) {
-  const recipe = RECIPES[Math.floor(game.rng() * RECIPES.length)];
+  const taken = new Set(game.orders.map((o) => o.recipeId));
+  const choices = RECIPES.filter((r) => !taken.has(r.id));
+  const pool = choices.length > 0 ? choices : RECIPES;
+  const recipe = pool[Math.floor(game.rng() * pool.length)];
   game.orders.push({
     uid: game.nextUid,
     recipeId: recipe.id,
     timeLeft: CONFIG.orderTimeMax,
     timeMax: CONFIG.orderTimeMax,
+    faceId: Math.floor(game.rng() * 4),
   });
   game.nextUid += 1;
 }
@@ -158,6 +164,7 @@ export function debugState(game) {
       recipeId: o.recipeId,
       timeLeft: Math.round(o.timeLeft * 10) / 10,
       timeMax: o.timeMax,
+      faceId: o.faceId,
     })),
     plate: [...game.plate],
   };

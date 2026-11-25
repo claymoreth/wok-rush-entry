@@ -54,21 +54,21 @@ export const RECIPES = [
     name: "Chicken Noodles",
     price: 350,
     ingredients: ["noodles", "chicken", "chili", "sauce"],
-    icon: "assets/dish-fried-noodles.png",
+    icon: "assets/dish-chicken-noodles.png",
   },
   {
     id: "veggie-fried-rice",
     name: "Veggie Fried Rice",
     price: 300,
     ingredients: ["rice", "veggies", "egg", "sauce"],
-    icon: "assets/dish-fried-rice.png",
+    icon: "assets/dish-veggie-fried-rice.png",
   },
   {
     id: "spicy-cheese-toast",
     name: "Spicy Cheese Toast",
     price: 280,
     ingredients: ["bread", "cheese", "chili"],
-    icon: "assets/dish-toast.png",
+    icon: "assets/dish-spicy-cheese-toast.png",
   },
 ];
 

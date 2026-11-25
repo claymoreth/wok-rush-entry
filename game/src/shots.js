@@ -48,8 +48,8 @@ export function applyShot(game, shot, seed) {
   const first = pickRecipe(staged, seed % RECIPES.length);
   const second = pickRecipe(staged, (seed + 2) % RECIPES.length);
   staged.orders = [
-    { uid: 1, recipeId: first.id, timeLeft: 22, timeMax: CONFIG.orderTimeMax },
-    { uid: 2, recipeId: second.id, timeLeft: 27, timeMax: CONFIG.orderTimeMax },
+    { uid: 1, recipeId: first.id, timeLeft: 22, timeMax: CONFIG.orderTimeMax, faceId: 0 },
+    { uid: 2, recipeId: second.id, timeLeft: 27, timeMax: CONFIG.orderTimeMax, faceId: 2 },
   ];
   staged.nextUid = 3;
 

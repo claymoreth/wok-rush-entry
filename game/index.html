@@ -52,7 +52,9 @@
   .ticket.ready { border-color: #2fae4e; box-shadow: 0 0 16px #2fae4e; }
   @keyframes pulse { from { box-shadow: 0 0 0 #e02424; } to { box-shadow: 0 0 18px #e02424; } }
   .ticket .tname { font-size: 22px; font-weight: 900; color: #5b3413;
-    padding-right: 92px; line-height: 1.05; }
+    padding-right: 92px; padding-left: 54px; line-height: 1.05; }
+  .ticket .face { position: absolute; top: 8px; left: 10px; width: 46px; height: 46px;
+    border-radius: 50%; border: 2px solid #c9a86a; background: #fff; }
   .ticket .timer { position: absolute; top: 8px; right: 10px; background: #ff9a3d;
     color: #fff; font-weight: 900; font-size: 19px; padding: 3px 10px;
     border-radius: 16px; border: 2px solid #8a3d00; }
@@ -72,7 +74,16 @@
 
   /* ---------- Scene ---------- */
   #chef { position: absolute; left: 540px; top: 318px; width: 200px; height: 200px;
-    z-index: 3; }
+    z-index: 3; animation: bob 2.6s ease-in-out infinite; }
+  @keyframes bob { 0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); } }
+  .steam { position: absolute; width: 26px; height: 26px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,.85) 0%,
+    rgba(255,255,255,0) 70%); z-index: 2; pointer-events: none;
+    animation: steamRise 2.8s ease-out infinite; opacity: 0; }
+  .steam.s2 { animation-delay: .9s; } .steam.s3 { animation-delay: 1.8s; }
+  @keyframes steamRise { 0% { transform: translateY(0) scale(.6); opacity: 0; }
+    30% { opacity: .55; } 100% { transform: translateY(-48px) scale(1.2); opacity: 0; } }
   #plateArea { position: absolute; left: 400px; top: 500px; width: 240px; height: 56px;
     display: flex; align-items: center; justify-content: center; gap: 6px; z-index: 4; }
   #plateArea.shake { animation: shake .3s; }
@@ -141,7 +152,7 @@
   .howCard.blue { background: #2f9be8; } .howCard.orange { background: #ff9a3d; }
   .howCard.red { background: #e2574c; }
   #titleScreen .chefTitle { position: absolute; left: 540px; bottom: 155px;
-    width: 200px; height: 200px; }
+    width: 200px; height: 200px; animation: bob 2.6s ease-in-out infinite; }
   #startBtn { margin-top: auto; margin-bottom: 14px; width: 420px; height: 64px;
     border-radius: 16px; border: 3px solid #145c28; cursor: pointer;
     background: linear-gradient(#7ee081, #2fae4e); color: #fff; font-weight: 900;
@@ -174,6 +185,9 @@
     <div id="shiftClock">SHIFT 3:00</div>
   </div>
   <div id="orders"></div>
+  <span class="steam" style="left: 882px; top: 342px;"></span>
+  <span class="steam s2" style="left: 922px; top: 334px;"></span>
+  <span class="steam s3" style="left: 962px; top: 342px;"></span>
   <img id="chef" src="assets/chef.png" alt="Chef">
   <div id="plateArea"></div>
   <div id="rushBanner">RUSH HOUR!</div>

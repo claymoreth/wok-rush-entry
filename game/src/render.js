@@ -99,6 +99,7 @@ export function render(game, els) {
       })
       .join("");
     ticket.innerHTML =
+      `<img class="face" src="assets/face-${order.faceId ?? 0}.png" alt="Customer">` +
       `<div class="tname">${recipe.name}</div>` +
       `<div class="timer${hurry ? " low" : ""}">◷ ${secs}s</div>` +
       `<img class="dish" src="${recipe.icon}" alt="${recipe.name}">` +

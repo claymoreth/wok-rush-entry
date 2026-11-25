@@ -1,10 +1,16 @@
 // input.js — keyboard and mouse controls.
 import { INGREDIENT_BY_KEY } from "./recipes.js";
 import { addIngredient, clearPlate, servePlate, startShift, resetGame } from "./state.js";
+import { startMusic } from "./audio.js";
 
 export function bindInput(game, audio, els) {
   function startOrRestart() {
-    if (game.phase === "title" || game.phase === "end") startShift(game);
+    // User gesture (START click / Enter / R / Space): the only place the
+    // music loop may start, so the browser never blocks it as autoplay.
+    if (game.phase === "title" || game.phase === "end") {
+      startShift(game);
+      startMusic(audio);
+    }
   }
 
   function onKey(event) {

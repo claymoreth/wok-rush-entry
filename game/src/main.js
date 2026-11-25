@@ -1,7 +1,7 @@
 // main.js — bootstrap: build DOM, bind input, run the game loop.
 import { createGame, tick, debugState } from "./state.js";
 import { buildStaticDom, collectElements, render, fitStage } from "./render.js";
-import { createAudio, playCue } from "./audio.js";
+import { createAudio, playCue, stopMusic, syncMusic } from "./audio.js";
 import { bindInput } from "./input.js";
 import { applyShot } from "./shots.js";
 
@@ -22,6 +22,7 @@ window.__wokRush = {
     return debugState(game);
   },
   game,
+  audio,
 };
 
 window.addEventListener("resize", fitStage);
@@ -32,6 +33,8 @@ function loop(now) {
   const dt = Math.min(0.05, (now - lastTime) / 1000);
   lastTime = now;
   tick(game, dt);
+  if (game.phase === "end") stopMusic(audio);
+  syncMusic(audio, game.phase === "playing");
   while (game.events.length > 0) playCue(audio, game.events.shift());
   render(game, els);
   requestAnimationFrame(loop);
